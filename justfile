@@ -43,6 +43,9 @@ whoami $name:
     echo $name
 start:
     npx expo-cli start
+format:
+    yarn format:write
+
 
 # Hidden Recipes
 
