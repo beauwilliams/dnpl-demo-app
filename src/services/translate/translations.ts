@@ -6,7 +6,7 @@ export const en = {
     navigation: {
       title: 'Navigation',
       button: {
-        push: 'Push Example screen',
+        push: 'View Transactions',
         show: 'Show Example screen',
         passProps: 'passProps to Example screen',
         sharedTransition: 'Shared Transition',

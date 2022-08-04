@@ -4,7 +4,8 @@ import {Colors, Typography} from 'react-native-ui-lib';
 import {stores} from '../stores';
 
 const colors: DesignSystemColors = {
-  primary: '#5383b8', // blue
+  primary: '#f0544c', // orange
+  // primary: '#5383b8', // blue
   secondary: '#469c57', // green
   accent: '#fed330', // yellow
   blackish: Colors.rgba(20, 20, 20, 1),
