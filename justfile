@@ -38,8 +38,8 @@ hello:
 display:
     #By default it prints the recipe that was run in output before outputting result
     echo -e "Hello World! {{UNDERLINE}}Here we see the recipe that was run printed also by omitting @ in front of recipe"
-install $package:
-    @expo install $package
+install *PACKAGES:
+   @expo install {{PACKAGES}}
 start:
     npx expo-cli start
 format:
