@@ -12,7 +12,7 @@ import {Reanimated2} from '../components/reanimated2';
 import {randomNum} from '../utils/help';
 import {BButton} from '../components/button';
 
-import {PaymentScreen} from "@components"
+import {PaymentScreen} from '@components';
 
 export const Main: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -81,7 +81,6 @@ export const Main: React.FC = observer(({}) => {
             <BButton margin-s1 label="Update counter value from API" onPress={api.counter.get} />
           </Section>
 
-
           <Text textColor center>
             localized with i18n-js
           </Text>
@@ -90,4 +89,3 @@ export const Main: React.FC = observer(({}) => {
     </View>
   );
 });
-
