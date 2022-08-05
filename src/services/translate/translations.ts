@@ -7,6 +7,7 @@ export const en = {
       title: 'Navigation',
       button: {
         push: 'View Transactions',
+        paynow: 'Pay Now',
         show: 'Show Example screen',
         passProps: 'passProps to Example screen',
         sharedTransition: 'Shared Transition',
@@ -25,6 +26,7 @@ export const ru = {
       title: 'Навигация',
       button: {
         push: 'Запушить Example экран',
+        paynow: 'Заплатить сейчас',
         show: 'Показать Example экран',
         passProps: 'passProps в Example экран',
         back: '← Назад',
