@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react';
+import {ScrollView} from 'react-native';
 import {CardField, useStripe} from '@stripe/stripe-react-native';
 import {Incubator, Toast, Text, PanningProvider, View} from 'react-native-ui-lib';
-import {getNavigationTheme} from '@utils';
-import {BButton} from '@components';
+import {Section, BButton} from '@components';
 import {useServices} from '../../services';
 import {Alert} from 'react-native';
 //NOTE: Stripe does not support rgba so we must convert..
 import rgbHex from 'rgb-hex';
+import {Colors, ViewProps} from 'react-native-ui-lib';
 
 function hello() {
   console.log('hello');
@@ -59,37 +60,43 @@ export function PaymentScreen() {
   };
   return (
     <View flex bg-bgColor>
-      <Incubator.Dialog visible={false} onDismiss={() => console.log('dismissed')}>
-        {<Text text60>Error</Text>}
-      </Incubator.Dialog>
-      <CardField
-        postalCodeEnabled={false}
-        placeholder={{
-          number: '4242 4242 4242 4242',
-          expiration: '12/24',
-          cvc: '123',
-        }}
-        cardStyle={{
-          backgroundColor: rgbHex(getNavigationTheme().colors.background),
-          textColor: rgbHex(getNavigationTheme().colors.text),
-        }}
-        style={{
-          width: '100%',
-          height: 50,
-          marginVertical: 30,
-        }}
-        onCardChange={cardDetails => {
-          console.log('cardDetails', cardDetails);
-        }}
-        onFocus={focusedField => {
-          console.log('focusField', focusedField);
-        }}
-      />
-      <BButton
-        marginV-s1
-        label={t.do('section.navigation.button.paynow')}
-        onPress={handleConfirmation}
-      />
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <Incubator.Dialog visible={false} onDismiss={() => console.log('dismissed')}>
+          {<Text text60>Error</Text>}
+        </Incubator.Dialog>
+        <View padding-s8>
+          <Section title={t.do('payment.title')}>
+            <CardField
+              postalCodeEnabled={false}
+              placeholder={{
+                number: '4242 4242 4242 4242',
+                expiration: '12/24',
+                cvc: '123',
+              }}
+              cardStyle={{
+                backgroundColor: Colors.backgroundColor,
+                textColor: rgbHex(Colors.textColor),
+              }}
+              style={{
+                width: '100%',
+                height: 50,
+                marginVertical: 30,
+              }}
+              onCardChange={cardDetails => {
+                console.log('cardDetails', cardDetails);
+              }}
+              onFocus={focusedField => {
+                console.log('focusField', focusedField);
+              }}
+            />
+            <BButton
+              marginV-s1
+              label={t.do('section.navigation.button.paynow')}
+              onPress={handleConfirmation}
+            />
+          </Section>
+        </View>
+      </ScrollView>
     </View>
   );
 }

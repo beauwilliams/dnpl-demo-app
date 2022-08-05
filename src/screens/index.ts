@@ -5,14 +5,16 @@ import {Settings} from './settings';
 import {Example} from './screen-sample';
 import {genRootNavigator, genStackNavigator, genTabNavigator} from '../services/navigation/help';
 import {screenDefaultOptions, tabBarDefaultOptions} from '../services/navigation/options';
+import {PaymentScreen} from '@components';
 
 // Describe your screens here
 export type Tabs = 'Main' | 'WIP' | 'Settings';
-export type Modal = 'ExampleModal';
-export type Screen = 'Main' | 'Example' | 'Settings';
+export type Modal = 'ExampleModal' | 'PaymentModal';
+export type Screen = 'Main' | 'Example' | 'Settings' | 'Payment';
 
 export type ModalProps = {
   ExampleModal: undefined;
+  PaymentModal: undefined;
 };
 export type ScreenProps = {
   Main: undefined;
@@ -46,11 +48,20 @@ const screens: ScreenLayouts = {
       ...screenDefaultOptions(),
     }),
   },
+  Payment: {
+    name: 'Payment',
+    component: PaymentScreen,
+    options: () => ({
+      title: 'Payment',
+      ...screenDefaultOptions(),
+    }),
+  },
 };
 const HomeStack = () => genStackNavigator([screens.Main, screens.Example]);
 const ExampleStack = () => genStackNavigator([screens.Example]);
 const SettingsStack = () => genStackNavigator([screens.Settings]);
 const ExampleModalStack = () => genStackNavigator([screens.Main, screens.Example]);
+const PaymentModalStack = () => genStackNavigator([screens.Payment]);
 
 // Tabs
 const tabs: TabScreenLayouts = {
@@ -90,8 +101,15 @@ const modals: ModalScreenLayouts = {
       title: 'ExampleModal',
     }),
   },
+  PaymentModal: {
+    name: 'PaymentModal',
+    component: PaymentModalStack,
+    options: () => ({
+      title: 'PaymentModal',
+    }),
+  },
 };
 
 // Root Navigator
 export const RootNavigator = (): JSX.Element =>
-  genRootNavigator(TabNavigator, [modals.ExampleModal]);
+  genRootNavigator(TabNavigator, [modals.ExampleModal, modals.PaymentModal]);

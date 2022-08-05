@@ -12,8 +12,6 @@ import {Reanimated2} from '../components/reanimated2';
 import {randomNum} from '../utils/help';
 import {BButton} from '../components/button';
 
-import {PaymentScreen} from '@components';
-
 export const Main: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
@@ -47,12 +45,15 @@ export const Main: React.FC = observer(({}) => {
             />
             <BButton
               marginV-s1
+              label={t.do('section.navigation.button.paymentscreen')}
+              onPress={() => nav.show('PaymentModal')}
+            />
+            <BButton
+              marginV-s1
               label={t.do('section.navigation.button.sharedTransition')}
               onPress={() => Alert.alert('future feature: shared transition')}
             />
           </Section>
-
-          <PaymentScreen></PaymentScreen>
 
           <Section title="Reanimated 2">
             <Reanimated2 stID="reanimated2" />
