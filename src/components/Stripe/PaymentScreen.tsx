@@ -25,7 +25,7 @@ export function PaymentScreen() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:9000/create-payment-intent', {
+    fetch('http://localhost:9000/api/create-payment-intent', {
       method: 'POST',
     })
       .then(res => res.json())
