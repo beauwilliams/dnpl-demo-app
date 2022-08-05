@@ -42,6 +42,8 @@ install *PACKAGES:
    @expo install {{PACKAGES}}
 start:
     npx expo-cli start
+start-dev:
+    npx expo-cli start --dev-client
 format:
     yarn format:write
 

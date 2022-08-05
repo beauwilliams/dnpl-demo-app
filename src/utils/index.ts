@@ -1,1 +1,1 @@
-export {rgbToHex, getNavigationTheme} from './designSystem';
+export {getNavigationTheme} from './designSystem';

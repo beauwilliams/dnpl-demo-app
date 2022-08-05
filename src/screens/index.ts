@@ -26,7 +26,7 @@ const screens: ScreenLayouts = {
     name: 'Main',
     component: Main,
     options: () => ({
-      title: 'Home',
+      title: 'DNPL Demo',
       ...screenDefaultOptions(),
     }),
   },

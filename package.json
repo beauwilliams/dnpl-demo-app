@@ -52,6 +52,7 @@
     "react-native-screens": "~3.10.1",
     "react-native-ui-lib": "^6.11.0",
     "react-native-web": "0.17.1",
+    "rgb-hex": "^4.0.0",
     "rn-bounceable": "^1.1.0",
     "yup": "^0.32.11"
   },
