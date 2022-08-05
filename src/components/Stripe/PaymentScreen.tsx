@@ -25,38 +25,32 @@ export function PaymentScreen() {
   const [key, setKey] = useState('');
   const [visible, setVisible] = useState(true);
 
-  useEffect(() => {
-    fetch('http://localhost:9000/api/create-payment-intent', {
+  const handleConfirmation = async () => {
+    await fetch('http://localhost:9000/api/create-payment-intent', {
       method: 'POST',
     })
       .then(res => res.json())
-      .then(res => {
+      .then(async res => {
         console.log('intent', res);
         setKey((res as {clientSecret: string}).clientSecret);
+        if (res.clientSecret) {
+          const {paymentIntent, error} = await confirmPayment(res.clientSecret, {
+            type: 'Card',
+            billingDetails: {
+              email: 'demo@dnpl.com',
+            },
+          });
+
+          if (!error) {
+            Alert.alert('Received payment', `Billed for $${paymentIntent?.amount}`);
+          } else {
+            Alert.alert('Error', error.message);
+          }
+        } else {
+          Alert.alert('Error', 'No key');
+        }
       })
       .catch(e => Alert.alert(e.message));
-  }, []);
-
-  const handleConfirmation = async () => {
-    console.log('confirming');
-    console.log(visible);
-
-    if (key) {
-      const {paymentIntent, error} = await confirmPayment(key, {
-        type: 'Card',
-        billingDetails: {
-          email: 'demo@dnpl.com',
-        },
-      });
-
-      if (!error) {
-        Alert.alert('Received payment', `Billed for ${paymentIntent?.amount}`);
-      } else {
-        Alert.alert('Error', error.message);
-      }
-    } else {
-      Alert.alert('Error', 'No key');
-    }
   };
   return (
     <View flex bg-bgColor>
