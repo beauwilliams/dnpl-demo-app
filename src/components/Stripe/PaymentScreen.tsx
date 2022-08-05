@@ -85,7 +85,11 @@ export function PaymentScreen() {
           console.log('focusField', focusedField);
         }}
       />
-      <BButton marginV-s1 label={t.do('section.navigation.button.paynow')} onPress={handleConfirmation} />
+      <BButton
+        marginV-s1
+        label={t.do('section.navigation.button.paynow')}
+        onPress={handleConfirmation}
+      />
     </View>
   );
 }
