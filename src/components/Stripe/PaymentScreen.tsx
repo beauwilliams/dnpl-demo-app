@@ -1,28 +1,73 @@
+import {useEffect, useState} from 'react';
 import {CardField, useStripe} from '@stripe/stripe-react-native';
-import {View} from 'react-native-ui-lib';
+import {Incubator, Toast, Text, PanningProvider, View} from 'react-native-ui-lib';
 import {getNavigationTheme} from '@utils';
 import {BButton} from '@components';
 import {useServices} from '../../services';
+import {Alert} from 'react-native';
 //NOTE: Stripe does not support rgba so we must convert..
 import rgbHex from 'rgb-hex';
 
 function hello() {
   console.log('hello');
+  return (
+    <Incubator.Dialog visible={true} onDismiss={() => console.log('dismissed')}>
+      {<Text text60>Error</Text>}
+    </Incubator.Dialog>
+  );
 }
 
 export function PaymentScreen() {
-  const {confirmPayment} = useStripe();
   const {t} = useServices();
+  const {confirmPayment} = useStripe();
 
+  const [key, setKey] = useState('');
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    fetch('http://localhost:9000/create-payment-intent', {
+      method: 'POST',
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log('intent', res);
+        setKey((res as {clientSecret: string}).clientSecret);
+      })
+      .catch(e => Alert.alert(e.message));
+  }, []);
+
+  const handleConfirmation = async () => {
+    console.log('confirming');
+    console.log(visible);
+
+    if (key) {
+      const {paymentIntent, error} = await confirmPayment(key, {
+        type: 'Card',
+        billingDetails: {
+          email: 'demo@dnpl.com',
+        },
+      });
+
+      if (!error) {
+        Alert.alert('Received payment', `Billed for ${paymentIntent?.amount}`);
+      } else {
+        Alert.alert('Error', error.message);
+      }
+    } else {
+      Alert.alert('Error', 'No key');
+    }
+  };
   return (
     <View flex bg-bgColor>
+      <Incubator.Dialog visible={false} onDismiss={() => console.log('dismissed')}>
+        {<Text text60>Error</Text>}
+      </Incubator.Dialog>
       <CardField
         postalCodeEnabled={false}
         placeholder={{
           number: '4242 4242 4242 4242',
           expiration: '12/24',
           cvc: '123',
-
         }}
         cardStyle={{
           backgroundColor: rgbHex(getNavigationTheme().colors.background),
@@ -40,7 +85,7 @@ export function PaymentScreen() {
           console.log('focusField', focusedField);
         }}
       />
-      <BButton marginV-s1 label={t.do('section.navigation.button.paynow')} onPress={hello} />
+      <BButton marginV-s1 label={t.do('section.navigation.button.paynow')} onPress={handleConfirmation} />
     </View>
   );
 }
