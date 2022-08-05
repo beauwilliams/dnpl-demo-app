@@ -42,12 +42,19 @@ export function PaymentScreen() {
           });
 
           if (!error) {
-            Alert.alert('Received payment', `Billed for $${paymentIntent?.amount}`);
+            const amount = (paymentIntent?.amount || 0) / 100;
+            Alert.alert(
+              'Success',
+              `Payment for ${amount.toLocaleString('en-AU', {
+                style: 'currency',
+                currency: 'AUD',
+              })} was received`,
+            );
           } else {
             Alert.alert('Error', error.message);
           }
         } else {
-          Alert.alert('Error', 'No key');
+          Alert.alert('Error', 'No client key received from backend');
         }
       })
       .catch(e => Alert.alert(e.message));
