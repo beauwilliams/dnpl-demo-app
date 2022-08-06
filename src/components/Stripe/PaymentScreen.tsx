@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {ScrollView} from 'react-native';
+import {ActivityIndicator, ScrollView} from 'react-native';
 import {CardField, useStripe} from '@stripe/stripe-react-native';
 import {Incubator, Toast, Text, PanningProvider, View} from 'react-native-ui-lib';
 import {Section, BButton} from '@components';
@@ -11,11 +11,6 @@ import {Colors, ViewProps} from 'react-native-ui-lib';
 
 function hello() {
   console.log('hello');
-  return (
-    <Incubator.Dialog visible={true} onDismiss={() => console.log('dismissed')}>
-      {<Text text60>Error</Text>}
-    </Incubator.Dialog>
-  );
 }
 
 export function PaymentScreen() {
@@ -23,9 +18,10 @@ export function PaymentScreen() {
   const {confirmPayment} = useStripe();
 
   const [key, setKey] = useState('');
-  const [visible, setVisible] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleConfirmation = async () => {
+    setLoading(true);
     await fetch('http://localhost:9000/api/create-payment-intent', {
       method: 'POST',
     })
@@ -50,11 +46,14 @@ export function PaymentScreen() {
                 currency: 'AUD',
               })} was received`,
             );
+            setLoading(false);
           } else {
             Alert.alert('Error', error.message);
+            setLoading(false);
           }
         } else {
           Alert.alert('Error', 'No client key received from backend');
+          setLoading(false);
         }
       })
       .catch(e => Alert.alert(e.message));
@@ -62,10 +61,7 @@ export function PaymentScreen() {
   return (
     <View flex bg-bgColor>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Incubator.Dialog visible={false} onDismiss={() => console.log('dismissed')}>
-          {<Text text60>Error</Text>}
-        </Incubator.Dialog>
-        <View padding-s8>
+        <View padding-s4>
           <Section title={t.do('payment.title')}>
             <CardField
               postalCodeEnabled={false}
@@ -95,6 +91,9 @@ export function PaymentScreen() {
               label={t.do('section.navigation.button.paynow')}
               onPress={handleConfirmation}
             />
+            <View padding-s8>
+              <ActivityIndicator animating={loading}></ActivityIndicator>
+            </View>
           </Section>
         </View>
       </ScrollView>
