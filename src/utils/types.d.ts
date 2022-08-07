@@ -25,6 +25,26 @@ type CurrentAppearance = {
   system: boolean;
 };
 
+/* type Transaction = {
+  id: number;
+  transaction_id: string;
+  created_at: number;
+  paid_to: string;
+  amount: number;
+  currency: string
+  payment_method: string
+} */
+
+interface Transaction {
+  id: number;
+  transaction_id: string;
+  created_at: number;
+  paid_to: string;
+  amount: number;
+  currency: string
+  payment_method: string
+}
+
 type Language = 'en' | 'ru';
 
 // SERVICES
@@ -39,6 +59,9 @@ type UILanguage = 'System' | 'English' | 'Russian';
 type ExampleScreenProps = {
   value?: number;
 };
+type TransactionScreenProps = {
+  transaction?: Transaction;
+}
 
 // Settings
 type AppearanceAction = {
@@ -54,3 +77,9 @@ type LanguageAction = {
 type CounterGetResponse = {
   value: number;
 };
+type TransactionsGetResponse = {
+  message: Transaction[];
+  success: boolean;
+}
+
+

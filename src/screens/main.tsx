@@ -35,24 +35,24 @@ export const Main: React.FC = observer(({}) => {
           <Section title={t.do('section.navigation.title')}>
             <BButton
               marginV-s1
-              label={t.do('section.navigation.button.push')}
-              onPress={() => nav.push('Example', {value: randomNum()})}
+              label={t.do('section.navigation.button.paymentscreen')}
+              onPress={() => nav.show('PaymentModal')}
             />
             <BButton
+              marginV-s1
+              label={t.do('section.navigation.button.push')}
+              onPress={() => nav.push('Transactions')}
+            />
+            {/*<BButton
               marginV-s1
               label={t.do('section.navigation.button.show')}
               onPress={() => nav.show('ExampleModal')}
             />
             <BButton
               marginV-s1
-              label={t.do('section.navigation.button.paymentscreen')}
-              onPress={() => nav.show('PaymentModal')}
-            />
-            <BButton
-              marginV-s1
               label={t.do('section.navigation.button.sharedTransition')}
               onPress={() => Alert.alert('future feature: shared transition')}
-            />
+            />*/}
           </Section>
 
           <Section title="Reanimated 2">

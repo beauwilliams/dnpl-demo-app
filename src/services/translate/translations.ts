@@ -5,6 +5,9 @@ export const en = {
   payment: {
     title: 'Welcome, Jane',
   },
+  transactions: {
+   title: 'Recent transaction',
+  },
   section: {
     navigation: {
       title: 'Navigation',
@@ -27,6 +30,9 @@ export const ru = {
   },
   payment: {
     title: 'Добро пожаловать, Jane',
+  },
+  transactions: {
+   title: 'Transactions',
   },
   section: {
     navigation: {

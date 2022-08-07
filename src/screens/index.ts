@@ -3,14 +3,15 @@ import {ModalScreenLayouts, ScreenLayouts, TabScreenLayouts} from '../services/n
 import {Main} from './main';
 import {Settings} from './settings';
 import {Example} from './screen-sample';
+import {Transactions} from './transactions';
 import {genRootNavigator, genStackNavigator, genTabNavigator} from '../services/navigation/help';
 import {screenDefaultOptions, tabBarDefaultOptions} from '../services/navigation/options';
 import {PaymentScreen} from '@components';
 
 // Describe your screens here
-export type Tabs = 'Main' | 'WIP' | 'Settings';
+export type Tabs = 'Main' | 'WIP' | 'Settings' | 'Transactions';
 export type Modal = 'ExampleModal' | 'PaymentModal';
-export type Screen = 'Main' | 'Example' | 'Settings' | 'Payment';
+export type Screen = 'Main' | 'Example' | 'Settings' | 'Payment' | 'Transactions';
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -20,10 +21,20 @@ export type ScreenProps = {
   Main: undefined;
   Example: ExampleScreenProps;
   Settings: undefined;
+  Payment: undefined;
+  Transactions: TransactionScreenProps;
 } & ModalProps;
 
 // Screens
 const screens: ScreenLayouts = {
+  Transactions: {
+    name: 'Transactions',
+    component: Transactions,
+    options: () => ({
+    title: 'Transactions',
+    ...screenDefaultOptions(),
+    }),
+  },
   Main: {
     name: 'Main',
     component: Main,
@@ -57,8 +68,9 @@ const screens: ScreenLayouts = {
     }),
   },
 };
-const HomeStack = () => genStackNavigator([screens.Main, screens.Example]);
+const HomeStack = () => genStackNavigator([screens.Main, screens.Transactions,screens.Example]);
 const ExampleStack = () => genStackNavigator([screens.Example]);
+const TransactionsStack = () => genStackNavigator([screens.Transactions]);
 const SettingsStack = () => genStackNavigator([screens.Settings]);
 const ExampleModalStack = () => genStackNavigator([screens.Main, screens.Example]);
 const PaymentModalStack = () => genStackNavigator([screens.Payment]);
@@ -81,6 +93,15 @@ const tabs: TabScreenLayouts = {
       ...tabBarDefaultOptions('ExampleNavigator'),
     }),
   },
+  Transactions: {
+    name: 'TransactionsNavigator',
+    component: TransactionsStack,
+    options: () => ({
+      title: 'Transactions',
+      ...tabBarDefaultOptions('TransactionsNavigator'),
+    }),
+  },
+
   Settings: {
     name: 'SettingsNavigator',
     component: SettingsStack,
@@ -90,7 +111,7 @@ const tabs: TabScreenLayouts = {
     }),
   },
 };
-const TabNavigator = () => genTabNavigator([tabs.Main, tabs.WIP, tabs.Settings]);
+const TabNavigator = () => genTabNavigator([tabs.Main, tabs.Transactions,tabs.WIP, tabs.Settings]);
 
 // Modals
 const modals: ModalScreenLayouts = {
