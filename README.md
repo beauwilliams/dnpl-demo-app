@@ -12,7 +12,7 @@
 
 ## Backend
 
-[See the backend here, a simple json noSQL database and webserver written from scratch](https://github.com/beauwilliams/stripe-demo-react-native-app-json-database-backend}
+[See the backend here, a simple json noSQL database and webserver written from scratch](https://github.com/beauwilliams/stripe-demo-react-native-app-json-database-backend)
 
 
 
