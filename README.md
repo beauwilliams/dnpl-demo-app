@@ -17,6 +17,9 @@
 
 [See the backend here, a simple json noSQL database and webserver written from scratch](https://github.com/beauwilliams/stripe-demo-react-native-app-json-database-backend)
 
+## Screenshot
+
+![image](https://i.ibb.co/zmxY1kc/Screen-Shot-2022-09-06-at-3-46-11-pm.png)
 
 
 <p align="center">
