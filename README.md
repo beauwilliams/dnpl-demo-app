@@ -1,6 +1,7 @@
 # Demo react native app with stripe payments flow and backend
 
-[Video demo here](https://youtu.be/rdka42Xe15k)
+
+![Video demo here](https://youtu.be/rdka42Xe15k)
 
 ## Mobile App
 
