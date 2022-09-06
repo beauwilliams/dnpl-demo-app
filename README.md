@@ -1,3 +1,21 @@
+# Demo react native app with stripe payments flow and backend
+
+## Mobile App
+
+- Stripe payments with our backend to store transaction data
+- Expo app
+- MobX (redux)
+- Light/Dark theme
+- Production ready starter
+- iOS + Android
+- +More...
+
+## Backend
+
+[See the backend here, a simple json noSQL database and webserver written from scratch](https://github.com/beauwilliams/stripe-demo-react-native-app-json-database-backend}
+
+
+
 <p align="center">
   <img src="https://xxx-files.ggc.team/oss/expo-starter/cover.png" width="80%" title="Logo">
 </p>
